@@ -67,6 +67,11 @@ while True:
     # cria uma lista: tokens = [SEQNO, DATA, MSGS]
     tokens = received_message.decode().split(' ')
 
+    # se vier um "ping" do sender, responde com "pong" e espera outro pacote
+    if tokens[0] == "ping":
+        server_socket.sendto("pong".encode(), ip_address)
+        continue
+
     # verifica se há um número de sequência
     if not tokens[0].isdigit():
         print("Mensagem sem número de sequência")
@@ -79,7 +84,7 @@ while True:
     # para que o receiver saiba quantas mensagens devem ser reconhecidas
     if num_of_ack_to_be_sent < 0:
         num_of_ack_to_be_sent = int(tokens[2])
-    
+    # informa usuário da mensagem recebida
     print("RECV: " + received_message.decode())
 
     # se o número de sequência estiver correto, extrai o dado e incrementa o
@@ -87,19 +92,23 @@ while True:
     if tokens[0] == seq_number:
         payload = tokens[1]
         num_of_sent_ack += 1
+        # caso todas as validações estejam ok, alterna o sequence number esperado
+        if seq_number == "0":
+            seq_number = "1"
+        else:
+            seq_number = "0"
+        pass
 
     # cria string para ack de acordo com o número de sequência que chegou
     answer = "ACK " + tokens[0]
 
     # envia ack para o sender
     server_socket.sendto(answer.encode(), ip_address)
-
+    # informa o usuário da resposta enviada
     print("SENT: " + answer + "\r\n")
-
+    # caso todas as mensagens sejam reconhecidas, termina o script
     if num_of_sent_ack == num_of_ack_to_be_sent:
         break
+    pass
 
-# fecha o socket e termina o script
-server_socket.close()
-     
 

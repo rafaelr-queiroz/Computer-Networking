@@ -71,12 +71,12 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 client_socket.settimeout(1)
 
 # faz um ping no servidor para verificar a existência do mesmo
-client_socket.sendto("teste".encode(), ( server_ip, int(server_port)) )
+client_socket.sendto("ping".encode(), ( server_ip, int(server_port)) )
 
 try:
     test_message, ip_from_test = client_socket.recvfrom(buffer_size)
     # escreve no terminal a resposta do ping
-    print("Resposta do ping: " + test_message.decode())
+    print("Resposta do ping: " + test_message.decode() + "\r\n")
 except socket.timeout:
     # caso o servidor não exista, informa o usuário do problema
     # fecha o socket e termina o script
@@ -88,7 +88,7 @@ seq_number = "0"                    # SEQNO
 payload = 0                         # mensagem a ser enviada para o receiver
 packet = ""                         # pacote no formato: SEQNO DATA MSGS
 
-msg_counter = int(num_of_messages)
+msg_counter = int(num_of_messages)  # número de mensagens a serem enviadas
 
 while msg_counter > 0:
     # cria string representando o pacote
@@ -107,11 +107,13 @@ while msg_counter > 0:
         print("RECV: timeout\r\n")
         continue
     
-    if len(received_message) != 5:          # valida comprimento do pacote enviado pelo receiver
+    answer = received_message.decode()
+
+    if len(answer) != 5:          # valida comprimento do pacote enviado pelo receiver
         continue
-    elif received_message[0:3] != "ACK ":   # valida se pacote possui a substring "ACK "
+    elif answer[0:4] != "ACK ":   # valida se pacote possui a substring "ACK "
         continue
-    elif received_message[4] != seq_number: # valida o nº da sequência do pacote
+    elif answer[4] != seq_number: # valida o nº da sequência do pacote
         continue
 
     # caso todas as validações estejam ok, alterna o sequence number, incrementa o payload
