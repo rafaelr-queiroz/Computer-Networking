@@ -83,7 +83,7 @@ Este projeto contempla um sender e um receiver com transporte confiável de dado
     
 
     Note que a resposta do receiver é sempre ACK SEQNO, ou seja, o número SEQNO está ligado a qual ACK
-    server como reconhecimento de uma mensagem do sender.
+    será enviado como reconhecimento de uma mensagem específica do sender.
 
     Obs: Quaisquer erros na chamada dos scripts, a execução é terminada com uma mensagem sobre o proble
     -ma para o usuário. Os scripts terminam automaticamente quando todas as mensagens são enviadas e re
@@ -92,4 +92,4 @@ Este projeto contempla um sender e um receiver com transporte confiável de dado
     python receiver.py 12000
     O número da porta deve ser um inteiro entre 10001 e 11000 --> mensagem de erro
 
-    
+
