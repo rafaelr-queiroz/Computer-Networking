@@ -1,6 +1,16 @@
 # reliable-transfer-UDP
 
 Este projeto contempla um sender e um receiver com transporte confiável de dados sobre sockets UDP.
+Para utilizar os scripts sender.py e receiver.py é necessário ter o python 3.8+ instalado. O python
+pode ser baixado através do link:
+
+https://www.python.org/downloads/
+
+Caso haja dúvidas sobre a instalação e configuração do python acesse o link:
+
+https://www.python.org/about/gettingstarted/
+
+Não esqueça de adicionar o diretório do python na váriavel PATH caso seu OS seja Windows.
 
 # Como utilizar os scripts:
 
@@ -85,11 +95,19 @@ Este projeto contempla um sender e um receiver com transporte confiável de dado
     Note que a resposta do receiver é sempre ACK SEQNO, ou seja, o número SEQNO está ligado a qual ACK
     será enviado como reconhecimento de uma mensagem específica do sender.
 
-    Obs: Quaisquer erros na chamada dos scripts, a execução é terminada com uma mensagem sobre o proble
+    Obs1: Quaisquer erros na chamada dos scripts, a execução é terminada com uma mensagem sobre o proble
     -ma para o usuário. Os scripts terminam automaticamente quando todas as mensagens são enviadas e re
     -conhecidas. Exemplo de erro na chamada do script:
 
     python receiver.py 12000
     O número da porta deve ser um inteiro entre 10001 e 11000 --> mensagem de erro
 
+    Obs2: Caso seu OS seja Linux ou MAC e você tenha o python 2 e python 3 instalados, a chamada dos scripts
+    em linha de comando devem ser feitas como: 
+    
+    python3 <script> <arg1> ... <argN>
+
+    ao invés de:
+
+    python <script> <arg1> ... <argN>
 
