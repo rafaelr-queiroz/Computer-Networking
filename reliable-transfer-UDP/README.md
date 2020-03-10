@@ -14,9 +14,9 @@ Não esqueça de adicionar o diretório do python na váriavel PATH caso seu OS 
 
 # Como utilizar os scripts:
 
-    Serão necessários no mínimo dois computadores ou um computador e uma máquina virtual. Em um dos
-    computadores, abra um prompt de comando com um ambiente python 3.8+ e rode o script receiver.py
-    conforme a seguinte linha de comando:
+    Pode-se usar dois computadores ou um computador e uma máquina virtual. Em um dos computadores,
+    abra um prompt de comando com um ambiente python 3.8+ e rode o script receiver.py conforme a 
+    seguinte linha de comando:
 
     python receiver.py <porta do receiver>
 
